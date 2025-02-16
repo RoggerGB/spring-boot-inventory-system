@@ -1,0 +1,50 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<meta charset="UTF-8">
+
+<th:block th:include="fragments/head"></th:block>
+<body>
+
+	<th:block th:include="fragments/navbar"></th:block>
+	<div class="container">
+		<br></br>
+		<div class="card" style="max-width: 100%;">
+			<div class="card-header">Listado de pedidos</div>
+			<div class="card-body">
+
+
+				<br></br>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Codigo</th>
+							<th>Cliente</th>
+							<th>Serie</th>
+							<th>Correlativo</th>
+							<th>Estado</th>
+							<th>Fecha de registro</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="pedido : ${pedidos}">
+							<td th:text="${pedido.id}">1</td>
+							<td th:text="${pedido.cliente.ruc}">HAMP</td>
+							<td th:text="${pedido.serie}">HAMP</td>
+							<td th:text="${pedido.correlativo}">HAMP</td>
+							<td th:text="${pedido.estado}">HAMP</td>
+							<td th:text="${pedido.fechaR}">HAMP</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p th:text="${mensaje}" class="form-text text-danger"></p>
+
+		</div>
+
+
+	</div>
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>
+</html>

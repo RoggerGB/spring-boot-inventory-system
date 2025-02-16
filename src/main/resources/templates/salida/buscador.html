@@ -1,0 +1,108 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<th:block th:include="fragments/head"></th:block>
+<body>
+
+	<th:block th:include="fragments/navbar"></th:block>
+	<div class="container">
+		<br></br>
+		<div class="card" style="max-width: 100%;">
+			<div class="card-header">Ingrese el correlativo de la venta</div>
+			<div class="card-body form-outline">
+				<form th:action="@{/pedido/buscar}" method="post"
+					th:object="${pedido}" class="form-inline">
+					<div class="form-group">
+						<label for="buscar"></label> <input type="text"
+							class="form-control" id="buscar" th:field="*{correlativo}"
+							required="required" placeholder="Buscar orden">
+					</div>
+
+					<button type="submit" class="btn btn-primary">
+						<i class="fa fa-search" aria-hidden="true"></i>
+					</button>
+					<br></br>
+
+					<fieldset disabled class="table">
+
+
+						<div class="form-group row">
+							<label for="serie" class="col-sm-2 col-form-label">Serie
+								de compra</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="serie"
+									th:field="*{serie}" />
+							</div>
+						</div>
+						<p></p>
+						<div class="form-group row">
+							<label for="cliente" class="col-sm-2 col-form-label">Cliente
+								de compra</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="cliente"
+									th:field="*{cliente.contacto}" />
+							</div>
+						</div>
+						<p></p>
+						<div class="form-group row">
+							<label for="correlativo" class="col-sm-2 col-form-label">Correlativo</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="correlativo"
+									th:field="*{correlativo}" />
+							</div>
+						</div>
+					</fieldset>
+				</form>
+
+				<fieldset disabled class="table">
+
+					<div class="container py-4">
+						<div class="card bg-light">
+							<div class="card-header text-white bg-dark">Detalle de Pedido de
+								venta</div>
+							<div class="card-body">
+
+								<table class="table table-responsive highlight">
+									<thead>
+										<tr>
+											<th scope="col">Codigo</th>
+											<th scope="col">Producto</th>
+											<th scope="col">Precio Unitario</th>
+											<th scope="col">Cantidad</th>
+
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="detalleVenta : ${detalle}">
+											<td th:text="${detalleVenta.id}">1</td>
+											<td th:text="${detalleVenta.producto.descripcion}"></td>
+											<td th:text="${detalleVenta.precio}"></td>
+											<td th:text="${detalleVenta.cantidad}"></td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+
+					</div>
+
+				</fieldset>
+
+				<a th:href="@{/salida/registro}"
+					onclick=' return confirm("¿Esta seguro de hacer la salida?")'
+					class="btn btn-primary">Dar salida a mercaderia</a>
+			</div>
+			<p th:text="${mensaje}" class="form-text text-danger"></p>
+			<p th:text="${mensajeExitoso}" class="form-text text-success"></p>
+
+		</div>
+	</div>
+
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<th:block th:include="fragments/head"></th:block>
+<body>
+
+	<th:block th:include="fragments/navbar"></th:block>
+	<div class="container">
+		<br></br>
+		<div class="card" style="max-width: 100%;">
+			<div class="card-header">Nuevo producto</div>
+			<div class="card-body">
+				<form th:object="${producto}" th:action="@{/producto/registrar}"
+					th:method="post">
+					<div class="form-group row">
+						<label for="sku" class="col-sm-2 col-form-label">Codigo
+							SKU</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="sku"
+								th:field="*{sku}" /> <small class="form-text text-danger"
+								th:if="${#fields.hasErrors('sku')}" th:errors="*{sku}"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="descripcion" class="col-sm-2 col-form-label">Descripción
+						</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="descripcion"
+								th:field="*{descripcion}" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('descripcion')}"
+								th:errors="*{descripcion}"></small>
+						</div>
+					</div>
+						<div class="form-group row">
+						<label for="unidad" class="col-sm-2 col-form-label">Unidad
+							de medida</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="unidad"
+								th:field="*{unidad}" /> <small class="form-text text-danger"
+								th:if="${#fields.hasErrors('unidad')}" th:errors="*{unidad}"></small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="categoria" class="col-sm-2 col-form-label">Categoria
+							</label>
+						<div class="col-sm-6">
+							<select id="categoria" class="form-control"
+								th:field="*{categoria.id}">
+								<option th:each="categoria: ${categorias}"
+									th:text="${categoria.descripcion}" th:value="${categoria.id}"></option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="almacen" class="col-sm-2 col-form-label">Almacen</label>
+						<div class="col-sm-6">
+							<select id="almacen" class="form-control"
+								th:field="*{almacen.id}">
+								<option th:each="almacen: ${almacenes}"
+									th:text="${almacen.direccion}" th:value="${almacen.id}"></option>
+							</select>
+						</div>
+					</div>
+
+					
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="Guardar" class="btn btn-secondary"></input>
+						</div>
+					</div>
+
+				</form>
+
+			</div>
+			<p th:text="${mensaje}" class="form-text text-success"></p>
+		</div>
+	</div>
+
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>
+</html>

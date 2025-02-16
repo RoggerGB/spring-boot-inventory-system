@@ -1,0 +1,53 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<meta charset="UTF-8">
+
+<th:block th:include="fragments/head"></th:block>
+<body>
+
+	<th:block th:include="fragments/navbar"></th:block>
+	<div class="container">
+		<br></br>
+		<div class="card" style="max-width: 100%;">
+			<div class="card-header">Categorias</div>
+			<div class="card-body">
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Codigo</th>
+							<th>Descripción</th>
+							<th>Estado</th>
+							<th>Fecha Creacion</th>
+							<div sec:authorize="hasRole('ROLE_JEFE')">
+								<th>Mantenimiento</th>
+							</div>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="categoria : ${categorias}">
+							<td th:text="${categoria.id}">HAMP</td>
+							<td th:text="${categoria.descripcion}">HAMP</td>
+							<td th:text="${categoria.estado}">HAMP</td>
+							<td th:text="${categoria.fechaC}">HAMP</td>
+							<div sec:authorize="hasRole('ROLE_JEFE')">
+								<td><a th:href="@{'/categoria/activar/'+ ${categoria.id}}"
+									class="btn btn-success">Activar</a></td>
+							</div>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p th:text="${mensaje}" class="form-text text-danger"></p>
+
+		</div>
+
+
+	</div>
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>
+</html>

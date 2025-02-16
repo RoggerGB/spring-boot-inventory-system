@@ -1,0 +1,139 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<script type="text/javascript" th:src="@{/static/main.js}"></script>
+<th:block th:include="fragments/head"></th:block>
+<body>
+
+	<th:block th:include="fragments/navbar"></th:block>
+	<div class="container">
+		<br></br>
+		<div class="card" style="max-width: 100%;">
+			<div class="card-header">Nueva orden de compra</div>
+			<div class="card-body">
+				<form th:object="${ordenCompra}"
+					th:action="@{/orden/registrar}" th:method="post">
+					<div class="form-group row">
+						<label for="proveedor" class="col-sm-2 col-form-label">Proveedor</label>
+						<div class="col-sm-6">
+							<select id="proveedor" class="form-control"
+								th:field="*{proveedor.id}">
+								<option th:each="proveedor: ${proveedores}"
+									th:text="${proveedor.razon}" th:value="${proveedor.id}"></option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="correlativo" class="col-sm-2 col-form-label">Codigo
+							de compra</label>
+						<div class="col-sm-6">
+							<input type="text"  class="form-control" id="codigo"
+								th:field="*{codigo}" /> <small class="form-text text-danger"
+								th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></small>
+						</div>
+					</div>
+
+					<input class="btn btn-primary" readonly value="Agregar producto"
+						data-toggle="modal" data-target="#modalProducto"> <br></br>
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+
+							<input type="submit" value="Guardar" class="btn btn-secondary"></input>
+						</div>
+					</div>
+
+				</form>
+
+			</div>
+			<a>Detalle de productos</a>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Producto</th>
+						<th>Cantidad</th>
+						<th>Precio</th>
+						<th>Cambios</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="list : ${lista}">
+						<td th:text="${list.producto.descripcion}">HAMP</td>
+						<td th:text="${list.cantidad}">HAMP</td>
+						<td th:text="${list.precio}">HAMP</td>
+						<td><a th:href="@{'/ordenes/delete/'+ ${list.id}}"
+							class="btn btn-danger">Eliminar</a></td>
+					</tr>
+				</tbody>
+			</table>
+			<p th:text="${mensaje}" class="form-text text-danger"></p>
+		</div>
+	</div>
+	<div class="modal fade" id="modalProducto" tabindex="-1" role="dialog"
+		aria-labelledby="agregarProducto" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<form id="formProducto" th:object="${ordenpp}"
+					th:action="@{/agregar/nuevo}" method="post">
+					<div class="modal-header">
+						<h5 class="modal-tittle" id="agregarProducto">Producto</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="close">
+							<span aria-hidden="true">Salir</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<div class="form-group row">
+								<label for="producto" class="col-sm-2 col-form-label">Productos
+								</label>
+								<div class="col-sm-6">
+									<select id="producto" class="form-control"
+										th:field="*{producto}">
+
+										<option th:each="producto: ${productos}"
+											th:text="${producto.descripcion}" th:value="${producto.id}"></option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="numero" class="col-sm-2 col-form-label">Cantidad</label>
+								<div class="col-sm-6">
+									<input type="number" maxlength="9" class="form-control"
+										id="numero" th:field="*{cantidad}" />
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="numero" class="col-sm-2 col-form-label">Costo
+									Unitario</label>
+								<div class="col-sm-6">
+									<input type="number" maxlength="9" step="0.01"
+										class="form-control" id="numero" th:field="*{precio}" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-FOOTER">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal" aria-label="close">Cancelar</button>
+						<input type="submit" class="btn btn-primary" value="Agregar">
+						<br></br>
+					</div>
+				</form>
+			</div>
+		</div>
+
+
+	</div>
+
+
+
+
+
+
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>
+</html>

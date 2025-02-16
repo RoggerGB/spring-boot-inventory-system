@@ -1,0 +1,148 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a class="navbar-brand" href="#">LOGISIS</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent" aria-expanded="false"
+		aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active"><a class="nav-link"
+				th:href="@{/admin}">Inicio <span class="sr-only">(current)</span>
+			</a></li>
+
+			<div sec:authorize="hasRole('ROLE_JEFE')">
+
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Almacen </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" th:href="@{/almacen/nuevo}">Registrar
+							nuevo almacen</a> <a class="dropdown-item"
+							th:href="@{/almacen/lista}">Lista almacenes</a> <a
+							class="dropdown-item" th:href="@{/almacen/lista/desactivado}">Almacenes
+							dados de baja</a>
+
+						<div class="dropdown-divider"></div>
+					</div></li>
+			</div>
+
+
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+				role="button" data-toggle="dropdown" aria-haspopup="true"
+				aria-expanded="false"> Categoria </a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" th:href="@{/categoria/nuevo}">Registrar
+						nueva categoria</a>
+					<div sec:authorize="hasRole('ROLE_JEFE')">
+						<a class="dropdown-item" th:href="@{/categoria/lista}">Editar
+							categorias</a>
+					</div>
+					<div sec:authorize="hasRole('ROLE_JEFE')">
+						<a class="dropdown-item" th:href="@{/categoria/lista/baja}">Categorias
+							dadas de baja</a>
+					</div>
+					<div sec:authorize="hasRole('ROLE_AUXILIAR')">
+						<a class="dropdown-item" th:href="@{/categoria/lista}">Ver
+							categorias</a>
+					</div>
+
+					<div class="dropdown-divider"></div>
+				</div></li>
+
+			<div sec:authorize="hasRole('ROLE_JEFE')">
+
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Proveedor </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" th:href="@{/proveedor/nuevo}">Registrar
+							proveedor</a> <a class="dropdown-item" th:href="@{/proveedor/lista}">Ver
+							proveedores</a>
+
+
+						<div class="dropdown-divider"></div>
+					</div></li>
+			</div>
+
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+				role="button" data-toggle="dropdown" aria-haspopup="true"
+				aria-expanded="false"> Producto </a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" th:href="@{/producto/nuevo}">Registrar
+						producto</a>
+					<div sec:authorize="hasRole('ROLE_JEFE')">
+
+
+						<a class="dropdown-item" th:href="@{/producto/lista}">Editar
+							productos</a>
+					</div>
+					<div sec:authorize="hasRole('ROLE_AUXILIAR')">
+
+
+						<a class="dropdown-item" th:href="@{/producto/lista}">Ver
+							productos</a>
+					</div>
+					<div sec:authorize="hasRole('ROLE_JEFE')">
+						<a class="dropdown-item" th:href="@{/producto/desactivado}">Productos
+							dadas de baja</a>
+					</div>
+					<div class="dropdown-divider"></div>
+				</div></li>
+
+			<div sec:authorize="hasRole('ROLE_AUXILIAR')">
+
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Almacen </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" th:href="@{/almacen/lista/aux}">Ver</a>
+
+
+						<div class="dropdown-divider"></div>
+					</div></li>
+			</div>
+
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+				role="button" data-toggle="dropdown" aria-haspopup="true"
+				aria-expanded="false"> Orden de Compra </a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" th:href="@{/orden/nuevo}">Registrar Orden</a> <a
+						class="dropdown-item" th:href="@{/orden/lista}">Ver</a>
+
+
+					<div class="dropdown-divider"></div>
+				</div></li>
+
+		
+			<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+				role="button" data-toggle="dropdown" aria-haspopup="true"
+				aria-expanded="false"> Ingreso Mercaderia </a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item"
+						th:href="@{'/ingreso/orden/'+ ${session.usuario.id}}">Registrar
+						ingreso</a> <a class="dropdown-item" th:href="@{/ingreso/lista}">Reporte
+						de ingresos</a>
+
+					<div class="dropdown-divider"></div>
+				</div></li>
+
+			
+			<li class="nav-item active"><a class="nav-link font-italic">Bienvenido
+					<span class="font-italic" th:text="${session.usuario.nombres}"></span>
+			</a></li>
+		</ul>
+		<form th:action="@{/logout}" method="POST">
+			<button type="submit" class="btn btn-danger mt-3">Salir</button>
+		</form>
+	</div>
+</nav>

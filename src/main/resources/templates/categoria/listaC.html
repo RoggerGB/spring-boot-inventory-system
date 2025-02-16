@@ -1,0 +1,60 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<meta charset="UTF-8">
+
+<th:block th:include="fragments/head"></th:block>
+<body>
+
+	<th:block th:include="fragments/navbar"></th:block>
+	<div class="container">
+		<br></br>
+		<div class="card" style="max-width: 100%;">
+			<div class="card-header">Categorias</div>
+			<div class="card-body">
+
+					<a th:href="@{/categoria/nuevo}" class="btn btn-primary">Nuevo</a>
+					<br></br>
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Codigo</th>
+							<th>Descripción</th>
+							<th>Estado</th>
+							<th>Fecha Creacion</th>
+							<div sec:authorize="hasRole('ROLE_JEFE')">
+								<th></th>
+
+								<th>Mantenimiento</th>
+							</div>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="categoria : ${categorias}">
+							<td th:text="${categoria.id}">HAMP</td>
+							<td th:text="${categoria.descripcion}">HAMP</td>
+							<td th:text="${categoria.estado}">HAMP</td>
+							<td th:text="${#dates.format(categoria.fechaC, 'dd/MM/yyyy')}">HAMP</td>
+							<div sec:authorize="hasRole('ROLE_JEFE')">
+								<td><a th:href="@{'/categoria/edit/'+ ${categoria.id}}"
+									class="btn btn-success">Editar</a></td>
+								<td><a th:href="@{'/categoria/baja/'+${categoria.id}}"
+									class="btn btn-danger">Dar de baja</a></td>
+							</div>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p th:text="${mensaje}" class="form-text text-danger"></p>
+
+		</div>
+
+
+	</div>
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>
+</html>

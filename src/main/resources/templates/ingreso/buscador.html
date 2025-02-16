@@ -1,0 +1,126 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<th:block th:include="fragments/head"></th:block>
+<body>
+
+	<th:block th:include="fragments/navbar"></th:block>
+	<div class="container">
+		<br></br>
+
+		<div class="card" style="max-width: 100%;">
+			<div class="card-header">Ingreso de mercaderia</div>
+			<div class="card-body form-outline">
+				<b><label for="formControlRange">Puede seleccionar una
+						Orden por codigo</label></b>
+
+				<form th:action="@{/orden/buscar}" method="post"
+					th:object="${ordenCompra}">
+					<div class="form-row align-items-center">
+						<div class="col-auto my-1">
+							<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Seleccionar
+								orden</label> <select class="custom-select mr-sm-2"
+								id="inlineFormCustomSelect" th:field="*{codigo}">
+								<option th:each="orden: ${ordenes}" th:text="${orden.codigo}"
+									th:value="${orden.codigo}"></option>
+							</select>
+						</div>
+						<div class="col-auto my-1">
+							<button type="submit" class="btn btn-primary">
+								<i class="fa fa-search" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+				<b> <label for="formControlRange">O digitar el codigo de
+						la orden</label></b>
+
+				<form th:action="@{/orden/buscar}" method="post"
+					th:object="${ordenCompra}" class="form-inline">
+					<div class="form-group">
+						<label for="buscar"></label> <input type="text"
+							class="form-control" id="buscar" th:field="*{codigo}"
+							required="required" placeholder="Buscar orden">
+					</div>
+
+					<button type="submit" class="btn btn-primary">
+						<i class="fa fa-search" aria-hidden="true"></i>
+					</button>
+					<br></br>
+
+					<fieldset disabled class="table">
+
+
+						<div class="form-group row">
+							<label for="proveedor" class="col-sm-2 col-form-label">Proveedor
+								de compra</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="proveedor"
+									th:field="*{proveedor.razon}" />
+							</div>
+						</div>
+						<p></p>
+						<div class="form-group row">
+							<label for="correlativo" class="col-sm-2 col-form-label">Codigo
+								de orden</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="correlativo"
+									th:field="*{codigo}" />
+							</div>
+						</div>
+					</fieldset>
+				</form>
+				<fieldset disabled class="table">
+
+					<div class="container py-4">
+						<div class="card bg-light">
+							<div class="card-header text-white bg-dark">Detalle de
+								Orden de Compra</div>
+							<div class="card-body">
+
+								<table class="table table-responsive highlight">
+									<thead>
+										<tr>
+											<th scope="col">Codigo</th>
+											<th scope="col">Producto</th>
+											<th scope="col">Costo Unitario</th>
+											<th scope="col">Cantidad</th>
+
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="detalleCompra : ${detalle}">
+											<td th:text="${detalleCompra.id}">1</td>
+											<td th:text="${detalleCompra.producto.descripcion}">mdo</td>
+											<td th:text="${detalleCompra.costo}"></td>
+											<td th:text="${detalleCompra.cantidad}"></td>
+
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+
+					</div>
+
+				</fieldset>
+
+				<a th:href="@{/ingreso/registro}"
+					onclick=' return confirm("¿Esta seguro de hacer el ingreso?")'
+					class="btn btn-primary">Ingresar mercaderia</a>
+
+			</div>
+			<p th:text="${mensaje}" class="form-text text-danger"></p>
+			<p th:text="${mensajeExitoso}" class="form-text text-success"></p>
+
+		</div>
+	</div>
+
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>
+</html>

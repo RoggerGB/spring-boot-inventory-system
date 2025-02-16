@@ -1,0 +1,51 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<meta charset="UTF-8">
+
+<th:block th:include="fragments/head"></th:block>
+<body>
+
+	<th:block th:include="fragments/navbar"></th:block>
+	<div class="container">
+		<br></br>
+		<div class="card" style="max-width: 100%;">
+			<div class="card-header">Listado de proveedores</div>
+			<div class="card-body">
+
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Codigo</th>
+							<th>Razon social</th>
+							<th>RUC</th>
+							<th>Direccion</th>
+							<th>Contacto</th>
+							<th>Telefono</th>
+							<th>Correo</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="proveedor : ${proveedores}">
+							<td th:text="${proveedor.id}">1</td>
+							<td th:text="${proveedor.razon}">HAMP</td>
+							<td th:text="${proveedor.ruc}">HAMP</td>
+							<td th:text="${proveedor.direccion}">HAMP</td>
+							<td th:text="${proveedor.contacto}">HAMP</td>
+							<td th:text="${proveedor.numero}">HAMP</td>
+							<td th:text="${proveedor.correo}">HAMP</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+
+
+	</div>
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>
+</html>

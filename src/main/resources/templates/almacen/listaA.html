@@ -1,0 +1,55 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<meta charset="UTF-8">
+
+<th:block th:include="fragments/head"></th:block>
+<body>
+
+	<th:block th:include="fragments/navbar"></th:block>
+	<div class="container">
+		<br></br>
+		<div class="card" style="max-width: 100%;">
+			<div class="card-header">Listado de almacenes</div>
+			<div class="card-body">
+
+
+				<a th:href="@{/almacen/nuevo}" class="btn btn-primary">Nuevo</a> <br></br>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Codigo</th>
+							<th>Descripción</th>
+							<th>Direccion</th>
+							<th>Estado</th>
+							<th>Fecha de creación</th>
+							<th></th>
+							<th>Mantenimiento</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="almacen : ${almacenes}">
+							<td th:text="${almacen.codigo}">HAMP</td>
+							<td th:text="${almacen.descripcion}">HAMP</td>
+							<td th:text="${almacen.direccion}">1</td>
+							<td th:text="${almacen.estado}">HAMP</td>
+							<td th:text="${almacen.fechaC}">HAMP</td>
+							<td><a th:href="@{'/almacen/edit/'+ ${almacen.id}}"
+								class="btn btn-success">Editar</a></td>
+							<td><a th:href="@{'/almacen/baja/'+${almacen.id}}"
+								class="btn btn-danger">Dar de baja</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p th:text="${mensaje}" class="form-text text-danger"></p>
+
+		</div>
+
+
+	</div>
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>
+</html>

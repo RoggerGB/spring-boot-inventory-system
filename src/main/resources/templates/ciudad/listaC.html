@@ -1,0 +1,47 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<meta charset="UTF-8">
+
+<th:block th:include="fragments/head"></th:block>
+<body>
+
+	<th:block th:include="fragments/navbar"></th:block>
+	<div class="container">
+		<br></br>
+		<div class="card" style="max-width: 100%;">
+			<div class="card-header">Listado de ciudades</div>
+			<div class="card-body">
+
+
+				<a th:href="@{/ciudad/nuevo}" class="btn btn-primary">Nuevo</a> <br></br>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th>Nombre</th>
+							<th>Mantenimiento</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="ciudad : ${ciudades}">
+							<td th:text="${ciudad.id}">1</td>
+							<td th:text="${ciudad.nombre}">HAMP</td>
+							<td><a th:href="@{'/ciudad/edit/'+ ${ciudad.id}}"
+								class="btn btn-success">Editar</a></td>
+							<td><a th:href="@{'/ciudad/delete/' + ${ciudad.id}}"
+								class="btn btn-danger">Eliminar</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p th:text="${mensaje}" class="form-text text-danger"></p>
+
+		</div>
+
+
+	</div>
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>
+</html>

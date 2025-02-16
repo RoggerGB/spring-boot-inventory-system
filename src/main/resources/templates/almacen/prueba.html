@@ -1,0 +1,100 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<th:block th:include="fragments/head"></th:block>
+<body>
+
+	<th:block th:include="fragments/navbar"></th:block>
+	<div class="container">
+		<br></br>
+		<div class="card" style="max-width: 100%;">
+			<div class="card-header">Nuevo Almacen</div>
+			<div class="card-body">
+				<form th:object="${almacen}" th:action="@{/almacen/registrar}"
+					th:method="post">
+					<div class="form-group row">
+						<label for="codigo" class="col-sm-2 col-form-label">Codigo
+							de almacen(AFXX-0000)</label>
+						<div class="col-sm-6">
+							<input type="text" maxlength="8" class="form-control" id="codigo"
+								th:field="*{codigo}" /> <small class="form-text text-danger"
+								th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="descripcion"
+								th:field="*{descripcion}" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('descripcion')}"
+								th:errors="*{descripcion}"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="direccion" class="col-sm-2 col-form-label">Dirección</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="direccion"
+								th:field="*{direccion}" /> <small class="form-text text-danger"
+								th:if="${#fields.hasErrors('direccion')}"
+								th:errors="*{direccion}"></small>
+						</div>
+					</div>
+
+
+					<div class="form-group row">
+						<label for="estado" class="col-sm-2 col-form-label">Estado</label>
+						<div class="col-sm-6">
+
+							<div class="btn-group">
+								<input type="radio" class="btn-check" name="options"
+									id="option1" autocomplete="off" checked th:field="*{estado}" th:value="1" /> <label
+									class="btn btn-primary" for="option1">Habilitado</label> 
+								<input type="radio" class="btn-check" name="options" id="option2"
+									autocomplete="off" th:field="*{estado}" th:value="0" /> <label class="btn btn-info"
+									for="option2">Desabilitado</label>
+							</div>
+						</div>
+
+					</div>
+					<div class="form-group row">
+						<label for="fechaC" class="col-sm-2 col-form-label">Fecha
+							de Creación</label>
+						<div class="col-sm-6">
+							<input type="date" class="form-control" id="fechaC"
+								th:field="*{fechaC}" /> <small class="form-text text-danger"
+								th:if="${#fields.hasErrors('fechaC')}" th:errors="*{fechaC}"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="fechaB" class="col-sm-2 col-form-label">Fecha
+							de Baja</label>
+						<div class="col-sm-6">
+							<input type="date" class="form-control" id="fechaB"
+								th:field="*{fechaB}" /> <small class="form-text text-danger"
+								th:if="${#fields.hasErrors('fechaB')}" th:errors="*{fechaB}"></small>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" value="Guardar" class="btn btn-secondary"></input>
+						</div>
+					</div>
+
+				</form>
+
+			</div>
+			<p th:text="${mensaje}" class="form-text text-success"></p>
+		</div>
+	</div>
+
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<meta charset="UTF-8">
+
+<th:block th:include="fragments/head"></th:block>
+<body>
+
+	<th:block th:include="fragments/navbar"></th:block>
+	<div class="container">
+		<br></br>
+		<div class="card" style="max-width: 100%;">
+			<div class="card-header">Listado de productos</div>
+			<div class="card-body">
+
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Descripción</th>
+							<th>Categoria</th>
+							<th>Almacen</th>
+							<th>Estado</th>
+							<th>Fecha de creacion</th>
+							<th>Mantenimiento</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="producto : ${productos}">
+							<td th:text="${producto.descripcion}">HAMP</td>
+							<td th:text="${producto.categoria.descripcion}">HAMP</td>
+							<td th:text="${producto.almacen.direccion}">HAMP</td>
+							<td th:text="${producto.estado}">HAMP</td>
+							<td th:text="${producto.fechaR}">HAMP</td>
+							<td><a th:href="@{'/producto/activar/'+ ${producto.id}}"
+								class="btn btn-success">Activar</a></td>
+
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p th:text="${mensaje}" class="form-text text-success"></p>
+
+		</div>
+
+
+	</div>
+	<th:block th:include="fragments/scripts"></th:block>
+
+</body>
+</html>
